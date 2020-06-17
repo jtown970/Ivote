@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS user_votes;
-DROP TABLE IF EXISTS house;
 DROP TABLE IF EXISTS house_votes;
+DROP TABLE IF EXISTS house;
 DROP TABLE IF EXISTS all_votes;
 DROP TABLE IF EXISTS users;
 
@@ -23,4 +23,12 @@ create table house (
     id serial primary key,
     rep_name varchar(100),
     location varchar(10)
+);
+
+create table house_votes (
+    id serial primary key,
+    reps_id int references house(id),
+    item text,
+    passed boolean,
+    voted_yes boolean
 );
