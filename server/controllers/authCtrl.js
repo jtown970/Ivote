@@ -16,7 +16,6 @@ module.exports = {
 
     const [newUser] = await db.register_user([user_name, hash, location ])
 
-    
     req.session.user = newUser
     res.status(200).send(req.session.user)
   },
@@ -47,5 +46,11 @@ module.exports = {
     res.sendStatus(200)
   },
 
-  getUser: async (req, res) => {},
+  getUser: async (req, res) => {
+    if(req.session.user){
+      res.status(200).send(req.session.user)
+    } else {
+      res.sendStatus(404)
+    }
+  },
 }
