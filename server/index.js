@@ -17,8 +17,8 @@ app.use(
   })
 )
 
-app.post(`/auth/login`, auth.login)
 app.post(`/auth/register`, mid, auth.register)
+app.post(`/auth/login`, auth.login)
 app.delete(`/auth/logout`, auth.logout)
 app.get(`/auth/user`, auth.getUser)
 
