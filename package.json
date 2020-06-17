@@ -1,0 +1,19 @@
+{
+  "name": "person-project",
+  "version": "1.0.0",
+  "description": "- The purpose of I vote is to see how you would vote compared to your representatives\r   - I vote solves the problem of not knowing one how a rep is really voting and how your view line up\r   - Target market for this app is US voters",
+  "main": "server/index.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express-session": "^1.17.1",
+    "express": "^4.17.1",
+    "massive": "^6.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
