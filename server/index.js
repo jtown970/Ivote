@@ -2,7 +2,9 @@ require('dotenv').config()
 const express = require('express'),
       session = require('express-session'),
       massive = require('massive'),
-      auth = require('./controllers/authCtrl'),
+      authCtrl = require('./controllers/authCtrl'),
+      userCtrl = require('./controllers/userCtrl'),
+      houseCtrl = require('./controllers/houseCtrl'),
       mid = require('./middleware/middleware'),
       {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env,
       app = express();
@@ -17,10 +19,23 @@ app.use(
   })
 )
 
-app.post(`/auth/register`, mid, auth.register)
-app.post(`/auth/login`, auth.login)
-app.delete(`/auth/logout`, auth.logout)
-app.get(`/auth/user`, auth.getUser)
+
+// authentication end points 
+app.post(`/auth/register`, mid, authCtrl.register)
+app.post(`/auth/login`, authCtrl.login)
+app.delete(`/auth/logout`, authCtrl.logout)
+app.get(`/auth/user`, authCtrl.getUser)
+
+// user votes end points
+app.get(`/users/votes/:id`, userCtrl.getUserVotes)
+app.get(`/users/votes`, userCtrl.getAllUserVotes)
+app.post(`/users/vote`, userCtrl.postUserVote)
+app.delete(`/users/vote/:id`, userCtrl.deleteUserVote)
+
+// house votes end points
+app.get(`/house/votes/:id`, houseCtrl.getHouseVotes)
+app.get(`/house/votes`, houseCtrl.getAllHouseVotes)
+app.post(`/house/vote`, houseCtrl.postHouseVote)
 
 massive({
   connectionString: CONNECTION_STRING,
