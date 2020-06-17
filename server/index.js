@@ -2,6 +2,8 @@ require('dotenv').config()
 const express = require('express'),
       session = require('express-session'),
       massive = require('massive'),
+      auth = require('./controllers/authCtrl'),
+      mid = require('./controllers/midware'),
       {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env,
       app = express();
 
@@ -14,6 +16,11 @@ app.use(
     cookie: {maxAge: 1000 * 60 * 60 * 24 * 31}, // good for one month
   })
 )
+
+app.post(`/auth/login`, auth.login)
+app.post(`/auth/register`, mid, auth.register)
+app.delete(`/auth/logout`, auth.logout)
+app.get(`/auth/user`, auth.getUser)
 
 massive({
   connectionString: CONNECTION_STRING,
