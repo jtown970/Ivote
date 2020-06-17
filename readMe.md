@@ -184,7 +184,7 @@
     - Users can view and dynamically generate data for a chart (5pts)
   - Sass or less 
     - Over 50% of project wide styling was done in Sass/Less format, with all major features used(variables, mixins, and nesting/inheritance). (10pts)
-  - puppeteer max (10) ??????
+  - puppeteer (10) 
   - if not puppeteer use sockets (make a chat section)
 
   ## HOSTING
