@@ -1,3 +1,5 @@
+const itemCtrl = require('./controllers/itemCtrl');
+
 require('dotenv').config()
 const express = require('express'),
       session = require('express-session'),
@@ -33,9 +35,12 @@ app.post(`/users/vote`, userCtrl.postUserVote)
 app.delete(`/users/vote/:id`, userCtrl.deleteUserVote)
 
 // house votes end points
-app.get(`/house/votes/:id`, houseCtrl.getHouseVotes)
+app.get(`/house/votes/:id`, houseCtrl.getHouseVoteById)
 app.get(`/house/votes`, houseCtrl.getAllHouseVotes)
-app.post(`/house/vote`, houseCtrl.postHouseVote)
+app.post(`/house/vote`, houseCtrl.addHouseVote)
+
+// items end points
+app.post(`/items/item`, itemCtrl.addItem)
 
 massive({
   connectionString: CONNECTION_STRING,
