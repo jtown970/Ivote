@@ -33,15 +33,12 @@ module.exports = {
     res.status(200).send(newVote[0])
   },
 
-  deleteUserVote:  (req, res) => {
+  deleteUserVote: async (req, res) => {
     const db = req.app.get('db')
     const {user_votes_id} = req.params
 
-    try{
-       db.delete_user_vote([user_votes_id])
-      res.status(200).send('vote deleted')
-    }catch {
-      res.status(500).send('could not delete vote')
-    }
+    db.delete_user_vote(user_votes_id)
+    .then(() => res.sendStatus(200))
+    .catch(err => res.status(500).send('err in delete ctrl fn'))
   }
 }
