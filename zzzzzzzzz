@@ -1,0 +1,62 @@
+DROP TABLE IF EXISTS user_votes;
+DROP TABLE IF EXISTS house_votes;
+DROP TABLE IF EXISTS items;
+DROP TABLE IF EXISTS users;
+
+
+create table users (
+    user_id serial primary key,
+    user_name varchar(20),
+    password text,
+    location varchar(2)
+);
+
+create table items (
+    item_id serial primary key,
+    item_name text
+);
+
+create table user_votes (
+    user_votes_id serial primary key,
+    users_id int references users(user_id),
+    item_id int references items(item_id),
+    vote_yes boolean
+);
+
+
+create table house_votes (
+    house_votes_id serial primary key,
+    item_id int references items(item_id),
+    rep_name varchar(100),
+    location varchar(10),
+    voted_yes boolean, 
+    passed boolean
+); 
+
+select * from house_votes
+where house_votes_id = 1;
+
+insert into items (item_name)
+values ('free wifi for all');
+ 
+select * from items;
+
+select * from house_votes;
+
+select house_votes_id, rep_name, location, item_name, passed, voted_yes from house_votes
+join items on house_votes.house_votes_id = items.item_id;
+
+select user_votes_id, users_id, item_name, vote_yes from user_votes
+join items on user_votes.user_votes_id = items.item_id
+
+ 
+-- select user_votes_id,  user_name, location, vote_yes from user_votes
+-- join users on user_votes.user_votes_id = users.user_id
+-- -- join items on user_votes.user_votes_id = items.item_id; 
+
+select * from user_votes;
+select * from users;
+
+
+delete from user_votes
+where user_votes_id = 2;
