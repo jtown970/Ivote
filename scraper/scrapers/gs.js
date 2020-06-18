@@ -65,30 +65,40 @@ const puppeteer = require('puppeteer');
     const abstainVotersDist = await page.evaluate(() => Array.from(
       document.querySelectorAll('div.abstain-votes td.nowrap')).map(all => all.innerText));
 
+    const yesVoteTest = await page.evaluate(() => Array.from(
+      document.querySelectorAll('div.yes-votes td.nowrap', 'div.yes-votes td.member a')).map(all => all.innerText.trim())
+    )
+    
+      const azRepsYes = yesVoters.filter(e => e == 'AZ') 
+      console.log(azRepsYes);
+      
+        
+      
 
       // // map function not working yet
-    // const result = await page.$$eval('main', (msgs) => msgs.map((msg) => {
-    //         return {
-    //             h1: msg.querySelector('h1').innerText,
-    //             overView:  msg.querySelector('section.vote-overview td.v-align-top').innerText
-    //         }})
-    // );
+   let result = await page.evaluate(() => 
+   Array.from(document.querySelectorAll("div.yes-votes")).map(html => ({
+      yesVoters: html.querySelector(' td.member a').innerText,
+      yesVotersDist: html.querySelector(' td.nowrap').innerText
+    }))
+   )
 
 
-  console.log(h1);
-  console.log(overViewSection);
-  console.log(yes);
-  console.log(no);
-  console.log(h2);
-  console.log(yesVotes);
-  console.log(yesVoters);
-  console.log(yesVotersDist);
-  console.log(noVotes);
-  console.log(noVoters);
-  console.log(noVotersDist);
-  console.log(abstainVotes);
-  console.log(abstainVoters);
-  console.log(abstainVotersDist);
-  // console.log(result);
+  // console.log(h1);
+  // console.log(overViewSection);
+  // console.log(yes);
+  // console.log(no);
+  // console.log(h2);
+  // console.log(yesVotes);
+  // console.log(yesVoters);
+  // console.log(yesVotersDist);
+  // console.log(noVotes);
+  // console.log(noVoters);
+  // console.log(noVotersDist);
+  // console.log(abstainVotes);
+  // console.log(abstainVoters);
+  // console.log(abstainVotersDist);
+  // console.log(...result);
+  console.log(yesVoteTest);
   await browser.close();
 })();
