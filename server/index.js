@@ -31,7 +31,7 @@ app.get(`/auth/user`, authCtrl.getUser)
 // user votes end points
 app.get(`/users/votes/:id`, userCtrl.getUserVotes)
 app.get(`/users/votes`, userCtrl.getAllUserVotes)
-app.post(`/users/vote`, userCtrl.postUserVote)
+app.post(`/users/vote`, userCtrl.addUserVote)
 app.delete(`/users/vote/:id`, userCtrl.deleteUserVote)
 
 // house votes end points
